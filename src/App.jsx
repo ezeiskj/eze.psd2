@@ -1,3 +1,4 @@
+import "./style.css?v=2"
 import { useEffect, useState, useRef } from "react"
 import { AsciiText, Dither } from "@appletosolutions/reactbits"
 import "./style.css"
@@ -10,13 +11,10 @@ export default function App() {
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [selectedExtra, setSelectedExtra] = useState(null)
   
-  // Detectar si es móvil automáticamente
   const [isMobile, setIsMobile] = useState(false)
-
   const heroRef = useRef(null)
 
   useEffect(() => {
-    // Detectamos si es una pantalla chica al cargar
     const checkDevice = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -53,7 +51,13 @@ export default function App() {
     { type: "image", src: `${BASE}P21.jpg` }, { type: "image", src: `${BASE}P22.png` }
   ]
 
-  const extras = [`${BASE}M1.png`, `${BASE}M2.png`, `${BASE}M3.png`]
+  const extras = [
+    { img: `${BASE}M1.png`, link: null },
+    { img: `${BASE}M2.png`, link: null },
+    { img: `${BASE}M3.png`, link: null },
+    { img: `${BASE}M4.png`, link: null },
+   { img: "M5.png", link: "manual.pdf" } // Solo el nombre del archivo
+  ]
 
   return (
     <main className="page">
@@ -115,9 +119,20 @@ export default function App() {
       <section className="extras-section">
         <h2 className="section-title">EXTRAS / ARCHIVE</h2>
         <div className="extras-full-container">
-          {extras.map((img, i) => (
-            <div key={i} className="extra-full-item" onClick={() => setSelectedExtra(img)}>
-              <img src={img} className="full-img-view" alt="Extra" />
+          {extras.map((item, i) => (
+            <div 
+              key={i} 
+              className="extra-full-item" 
+              onClick={() => {
+                if (item.link) {
+                  window.open(item.link, '_blank');
+                } else {
+                  setSelectedExtra(item.img);
+                }
+              }}
+            >
+              <img src={item.img} className="full-img-view" alt="Extra" />
+              {item.link && <span className="view-pdf-tag">VER MANUAL DE MARCA PDF</span>}
             </div>
           ))}
         </div>

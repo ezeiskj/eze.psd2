@@ -258,15 +258,36 @@ section{
   opacity:1;
 }
 
+.view-pdf-tag {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  color: black;
+  padding: 8px 15px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.extra-full-item:hover .view-pdf-tag {
+  opacity: 1;
+}
+
 /* CONTACT */
 .contact {
-  padding: 120px 0;
+  padding: 120px 5vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Centra todo horizontalmente */
   justify-content: center;
   background: #000;
-  text-align: center;
+  text-align: center; /* Asegura que los textos hijos se centren */
+  width: 100%;
 }
 
 .contact .section-title {
@@ -274,12 +295,15 @@ section{
   letter-spacing: 5px;
   color: #666;
   margin-bottom: 50px;
+  width: 100%;
 }
 
 .contact-buttons {
   display: flex;
   gap: 40px;
   margin-bottom: 60px;
+  justify-content: center; /* Esto es clave para centrar los botones */
+  width: 100%;
 }
 
 .contact-btn {
@@ -290,6 +314,7 @@ section{
   border-bottom: 2px solid #fff;
   padding-bottom: 4px;
   transition: opacity 0.3s ease;
+  white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
 }
 
 .contact-btn:hover {
@@ -300,6 +325,16 @@ section{
   font-size: 10px;
   letter-spacing: 4px;
   color: #444;
+  width: 100%;
+}
+
+/* RESPONSIVE MOBILE (Asegurate que esto esté dentro de tu @media max-width: 768px) */
+@media (max-width: 768px) {
+  .contact-buttons {
+    flex-direction: column; /* En celu, uno arriba del otro */
+    align-items: center;    /* Centrados */
+    gap: 30px;
+  }
 }
 
 /* LIGHTBOX */
