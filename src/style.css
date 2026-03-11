@@ -77,6 +77,14 @@ section{
   display:flex;
   align-items:center;
   justify-content:center;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.ascii-container canvas{
+  max-width:100%;
+  display:block;
+  margin:auto;
 }
 
 .scroll-hint{
@@ -250,7 +258,7 @@ section{
   opacity:1;
 }
 
-/* CONTACTO ESTILO LISTA SUBRAYADA */
+/* CONTACT */
 .contact {
   padding: 120px 0;
   display: flex;
@@ -319,17 +327,38 @@ section{
   background:none;
   border:none;
   color:white;
+  cursor: pointer;
 }
 
-.nav-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:40px;
-  background:none;
-  border:none;
-  color:white;
+/* RESPONSIVE MOBILE */
+@media (max-width:768px){
+  .track{
+    gap:16px;
+    padding-left:5vw;
+  }
+  .poster-card{
+    width:180px;
+    height:260px;
+    min-width:180px;
+  }
+  .ascii-container{
+    height:120px; 
+    width: 100%;
+    overflow: hidden;
+  }
+  .contact-buttons{
+    flex-direction:column;
+    gap:20px;
+  }
+  .mobile-hero-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 14vw;
+    font-weight: 900;
+    letter-spacing: -4px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 0.9;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  }
 }
-
-.nav-btn.prev{left:20px}
-.nav-btn.next{right:20px}
