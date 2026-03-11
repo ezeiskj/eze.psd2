@@ -1,7 +1,7 @@
-import "./style.css?v=2"
 import { useEffect, useState, useRef } from "react"
 import { AsciiText, Dither } from "@appletosolutions/reactbits"
-import "./style.css"
+// Forzamos actualización de CSS con versión v=2.1
+import "./style.css?v=2.1"
 
 const BASE = import.meta.env.BASE_URL
 
@@ -22,7 +22,9 @@ export default function App() {
     checkDevice()
     window.addEventListener('resize', checkDevice)
 
+    // Dejamos el timeout en 200ms, la solución real está en el CSS
     const t = setTimeout(() => setReady(true), 200)
+
     const observer = new IntersectionObserver(
       ([entry]) => setShowDither(!entry.isIntersecting),
       { threshold: 0.1 }
@@ -51,12 +53,13 @@ export default function App() {
     { type: "image", src: `${BASE}P21.jpg` }, { type: "image", src: `${BASE}P22.png` }
   ]
 
+  // Actualizado para usar BASE en M1-M4 también y asegurar que manual.pdf funcione
   const extras = [
     { img: `${BASE}M1.png`, link: null },
     { img: `${BASE}M2.png`, link: null },
     { img: `${BASE}M3.png`, link: null },
     { img: `${BASE}M4.png`, link: null },
-   { img: "M5.png", link: "manual.pdf" } // Solo el nombre del archivo
+    { img: `${BASE}M5.png`, link: `${BASE}manual.pdf` }
   ]
 
   return (
@@ -67,21 +70,24 @@ export default function App() {
       </div>
 
       <section className="hero" ref={heroRef}>
-        <div className="ascii-container">
-          {isMobile ? (
-            <h1 className="mobile-hero-title">PORTFOLIO</h1>
-          ) : (
-            ready && (
-              <AsciiText
-                text="PORTFOLIO"
-                characters="01"
-                textFontSize={75}
-                planeAspectRatio={900 / 220}
-                enableMouseInteraction
-                color="white"
-              />
-            )
-          )}
+        {/* Nueva estructura para forzar centrado desde el minuto cero */}
+        <div className="hero-center-wrapper">
+          <div className="ascii-container">
+            {isMobile ? (
+              <h1 className="mobile-hero-title">PORTFOLIO</h1>
+            ) : (
+              ready && (
+                <AsciiText
+                  text="PORTFOLIO"
+                  characters="01"
+                  textFontSize={75}
+                  planeAspectRatio={900 / 220}
+                  enableMouseInteraction
+                  color="white"
+                />
+              )
+            )}
+          </div>
         </div>
         <p className="scroll-hint">explorar ↓</p>
       </section>

@@ -59,40 +59,60 @@ section{
   z-index:2;
 }
 
-/* HERO */
+/* HERO - Solución definitiva de centrado */
 .hero{
   height:100vh;
+  width: 100vw;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   background:black;
-  padding:0 5vw;
-}
-
-.ascii-container{
-  width:100%;
-  max-width:900px;
-  height:220px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
   overflow: hidden;
 }
 
+/* Contenedor extra para garantizar flexbox puro al centro */
+.hero-center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px; /* Evita que se estire demasiado en pantallas gigantes */
+  margin: 0 auto;
+}
+
+.ascii-container{
+  width: 100%;
+  max-width: 900px;
+  height: 220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow: hidden;
+  /* Forzamos que el contenido nazca del centro */
+  margin: 0 auto !important; 
+  padding: 0 5vw; /* Padding interno para que no toque los bordes en tablets */
+}
+
+/* Importante: Asegurar que el canvas del componente se centre recursivamente */
 .ascii-container canvas{
-  max-width:100%;
-  display:block;
-  margin:auto;
+  display: block !important;
+  margin: 0 auto !important;
+  max-width: 100%;
 }
 
 .scroll-hint{
   position:absolute;
   bottom:30px;
+  left: 50%;
+  transform: translateX(-50%); /* Centrado absoluto en el fondo */
   opacity:0.6;
   letter-spacing:4px;
   font-size:12px;
+  white-space: nowrap;
 }
 
 /* ABOUT */
@@ -278,23 +298,15 @@ section{
   opacity: 1;
 }
 
-/* CONTACT */
+/* CONTACTO - Asegurar centrado vertical */
 .contact {
   padding: 120px 5vw;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra todo horizontalmente */
+  align-items: center; 
   justify-content: center;
   background: #000;
-  text-align: center; /* Asegura que los textos hijos se centren */
-  width: 100%;
-}
-
-.contact .section-title {
-  font-size: 10px;
-  letter-spacing: 5px;
-  color: #666;
-  margin-bottom: 50px;
+  text-align: center; 
   width: 100%;
 }
 
@@ -302,39 +314,8 @@ section{
   display: flex;
   gap: 40px;
   margin-bottom: 60px;
-  justify-content: center; /* Esto es clave para centrar los botones */
+  justify-content: center; 
   width: 100%;
-}
-
-.contact-btn {
-  text-decoration: none;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 700;
-  border-bottom: 2px solid #fff;
-  padding-bottom: 4px;
-  transition: opacity 0.3s ease;
-  white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
-}
-
-.contact-btn:hover {
-  opacity: 0.6;
-}
-
-.footer-tag {
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: #444;
-  width: 100%;
-}
-
-/* RESPONSIVE MOBILE (Asegurate que esto esté dentro de tu @media max-width: 768px) */
-@media (max-width: 768px) {
-  .contact-buttons {
-    flex-direction: column; /* En celu, uno arriba del otro */
-    align-items: center;    /* Centrados */
-    gap: 30px;
-  }
 }
 
 /* LIGHTBOX */
@@ -348,25 +329,18 @@ section{
   justify-content:center;
 }
 
-.lightbox img,
-.lightbox video{
-  max-width:90vw;
-  max-height:90vh;
-}
-
-.close-btn{
-  position:absolute;
-  top:26px;
-  right:36px;
-  font-size:36px;
-  background:none;
-  border:none;
-  color:white;
-  cursor: pointer;
-}
-
 /* RESPONSIVE MOBILE */
 @media (max-width:768px){
+  /* Reducimos altura hero mobile para asegurar centrado vertical */
+  .hero {
+    height: 100vh;
+    padding: 0;
+  }
+  
+  .hero-center-wrapper {
+    padding: 0;
+  }
+  
   .track{
     gap:16px;
     padding-left:5vw;
@@ -376,14 +350,18 @@ section{
     height:260px;
     min-width:180px;
   }
+  
+  /* Ajuste crítico mobile */
   .ascii-container{
     height:120px; 
     width: 100%;
     overflow: hidden;
+    padding: 0 2vw; /* Menos padding en celu */
   }
+  
   .contact-buttons{
     flex-direction:column;
-    gap:20px;
+    gap:30px;
   }
   .mobile-hero-title {
     font-family: 'Arial Black', sans-serif;
@@ -392,7 +370,9 @@ section{
     letter-spacing: -4px;
     color: #fff;
     text-transform: uppercase;
-    margin: 0;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
     line-height: 0.9;
     -webkit-text-stroke: 1px rgba(255,255,255,0.2);
   }
